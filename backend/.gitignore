@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.*
+!.env.example
+
+# Prisma local files
+*.db
+*.db-journal
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
