@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getPostById } from "../api/postApi";
 import PostHeader from "../components/posts/PostHeader";
 import PostActions from "../components/posts/PostActions";
+import Loading from "../components/common/Loading";
+
 
 export default function PostView() {
   const { id } = useParams();
@@ -13,11 +15,11 @@ export default function PostView() {
     queryFn: () => getPostById(id),
   });
 
-  if (isLoading)
-    return <p className="text-center text-gray-500 mt-10">Loading post...</p>;
+ if (isLoading) return <Loading message="Loading post..." />;
 
   if (error)
     return (
+
       <div className="text-center mt-10">
         <p className="text-red-500">Post not found.</p>
         <button

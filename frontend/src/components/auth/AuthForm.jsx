@@ -5,7 +5,7 @@ export default function AuthForm({ title, subtitle, fields, error, loading, onSu
         <h1 className="text-2xl font-bold text-blue-600 text-center mb-1">Scribble</h1>
         <p className="text-sm text-gray-500 text-center mb-6">{subtitle}</p>
 
-        <form onSubmit={onSubmit} className="space-y-4">
+       <form onSubmit={onSubmit} noValidate className="space-y-4">
           {fields}
 
           {error && (

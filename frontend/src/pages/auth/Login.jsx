@@ -15,13 +15,27 @@ export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  const validate = () => {
+    if (!email.trim()) return "Email is required.";
+    if (!/\S+@\S+\.\S+/.test(email)) return "Please enter a valid email address.";
+    if (!password) return "Password is required.";
+    return null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const validationError = validate();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     setError(null);
     setLoading(true);
     try {
       const data = await loginUser({ email, password });
-      login(data.token, { email }); 
+      login(data.token, { email });
       navigate("/dashboard", { replace: true });
     } catch (err) {
       setError(err.response?.data?.message || "Login failed. Please try again.");
@@ -54,7 +68,6 @@ export default function Login() {
               placeholder="Email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              required
               className={inputClass}
             />
             <input
@@ -62,7 +75,6 @@ export default function Login() {
               placeholder="Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
-              required
               className={inputClass}
             />
           </>

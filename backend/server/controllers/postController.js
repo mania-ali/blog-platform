@@ -83,10 +83,15 @@ async function getAllPublishedPosts(req, res, next) {
         const skip = (page - 1) * limit;
 
         const publishedPosts = await prisma.post.findMany({
-            where: { published: true },
-            skip: skip,
-            take: limit
-        });
+    where: { published: true },
+    skip,
+    take: limit,
+    include: {
+        author: {
+            select: { id: true, username: true } // never select password
+        }
+    }
+});
 
         const totalPosts = await prisma.post.count({
             where: { published: true }
@@ -118,8 +123,11 @@ async function getPostsByUser(req, res, next) {
         }
 
         const posts = await prisma.post.findMany({
-            where: { authorId: Number(userId) }
-        });
+    where: { authorId: Number(userId) },
+    include: {
+        author: { select: { id: true, username: true } }
+    }
+});
 
         res.status(200).json({
             posts: posts
@@ -138,9 +146,12 @@ if (!errors.isEmpty()) {
 }
         const { id } = req.params;
 
-        const post = await prisma.post.findUnique({
-            where: { id: Number(id) }
-        });
+       const post = await prisma.post.findUnique({
+    where: { id: Number(id) },
+    include: {
+        author: { select: { id: true, username: true } }
+    }
+});
 
         if (!post) {
             return res.status(404).json({ message: "Post with this id doesn't exist" });

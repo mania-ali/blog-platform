@@ -3,6 +3,8 @@ import { useUserPosts } from "../hooks/usePosts";
 import { getUserIdFromToken } from "../utils/decodeToken";
 import { useAuth } from "../hooks/useAuth";
 import PostCard from "../components/posts/PostCard";
+import Loading from "../components/common/Loading";
+import ErrorMessage from "../components/common/Error";
 
 export default function Dashboard() {
   const { token, logout } = useAuth();
@@ -16,11 +18,8 @@ export default function Dashboard() {
     logout();                          // then clear the token
   };
 
-  if (isLoading)
-    return <p className="text-center text-gray-500 mt-10">Loading your posts...</p>;
-
-  if (error)
-    return <p className="text-center text-red-500 mt-10">Couldn't load your posts.</p>;
+if (isLoading) return <Loading message="Loading post..." />;
+if (error) return <ErrorMessage message="Post not found." />;
 
   const posts = data.posts;
 

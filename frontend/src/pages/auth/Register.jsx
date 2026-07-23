@@ -16,16 +16,32 @@ export default function Register() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  const validate = () => {
+    if (!username.trim()) return "Username is required.";
+    if (username.trim().length < 3) return "Username must be at least 3 characters.";
+    if (!email.trim()) return "Email is required.";
+    if (!/\S+@\S+\.\S+/.test(email)) return "Please enter a valid email address.";
+    if (!password) return "Password is required.";
+    if (password.length < 6) return "Password must be at least 6 characters.";
+    return null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const validationError = validate();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     setError(null);
     setLoading(true);
     try {
       const data = await registerUser({ username, email, password });
       login(data.token, { username, email });
-     navigate("/dashboard", { replace: true });
+      navigate("/dashboard", { replace: true });
     } catch (err) {
-      // express-validator errors come back as { errors: [{ msg, path }] }
       const validationMsg = err.response?.data?.errors?.[0]?.msg;
       const generalMsg = err.response?.data?.message;
       setError(validationMsg || generalMsg || "Registration failed. Please try again.");
@@ -58,7 +74,6 @@ export default function Register() {
               placeholder="Username"
               value={username}
               onChange={e => setUsername(e.target.value)}
-              required
               className={inputClass}
             />
             <input
@@ -66,7 +81,6 @@ export default function Register() {
               placeholder="Email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              required
               className={inputClass}
             />
             <input
@@ -74,7 +88,6 @@ export default function Register() {
               placeholder="Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
-              required
               className={inputClass}
             />
           </>
