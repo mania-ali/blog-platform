@@ -5,7 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 import PostCard from "../components/posts/PostCard";
 import Pagination from "../components/posts/Pagination";
 import Loading from "../components/common/Loading";
-import Error from "../components/common/error";
+import Error from "../components/common/Error";
 
 export default function Feed() {
   const [page, setPage] = useState(1);
