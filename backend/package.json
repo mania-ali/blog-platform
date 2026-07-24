@@ -11,8 +11,8 @@
     "pg": "^8.22.0",
     "prisma": "^7.8.0"
   },
-  "scripts": {
-    "start": "prisma generate && node server/index.js",
-    "dev": "nodemon server/index.js"
-  }
+ "scripts": {
+  "start": "prisma db push && prisma generate && node server/index.js",
+  "dev": "nodemon server/index.js"
+}
 }
