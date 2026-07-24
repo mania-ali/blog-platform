@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../api/axios";
 import { getToken, setToken as saveToken, removeToken } from "../utils/tokenStorage";
-import { AuthContext } from "./authContextObject";
+import { AuthContext } from "./AuthContextObject";
 
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(getToken());
