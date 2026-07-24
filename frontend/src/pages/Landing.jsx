@@ -2,28 +2,28 @@ import { Link } from "react-router-dom";
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
+    <div className="min-h-screen bg-[#f0f2f5] flex flex-col justify-between">
       {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-          <span className="text-2xl font-bold text-blue-600">Scribble</span>
+      <header className="bg-white border-b border-gray-200">
+        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+          <span className="text-2xl font-black text-[#1877f2] tracking-tight">Scribble</span>
 
-          <nav className="flex items-center gap-3">
+          <nav className="flex items-center gap-2">
             <Link
               to="/feed"
-              className="text-sm font-medium text-gray-700 hover:text-blue-600 px-3 py-2"
+              className="text-sm font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition"
             >
               Feed
             </Link>
             <Link
               to="/login"
-              className="text-sm font-medium text-gray-700 hover:text-blue-600 px-3 py-2"
+              className="text-sm font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition"
             >
               Log in
             </Link>
             <Link
               to="/register"
-              className="text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full"
+              className="text-sm font-semibold text-white bg-[#1877f2] hover:bg-blue-600 px-4 py-2 rounded-lg shadow-xs transition"
             >
               Sign up
             </Link>
@@ -33,48 +33,58 @@ export default function Landing() {
 
       {/* Hero */}
       <main className="flex-1 flex items-center">
-        <div className="max-w-5xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+        <div className="max-w-5xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">
-              Write. Share. <span className="text-blue-600">Be read.</span>
+            <h1 className="text-4xl sm:text-5xl font-black text-gray-900 leading-tight mb-4 tracking-tight">
+              Connect & share <br />
+              <span className="text-[#1877f2]">your thoughts.</span>
             </h1>
-            <p className="text-lg text-gray-600 mb-8">
-              Scribble is a simple space to publish your thoughts and discover
-              what everyone else is writing about — no clutter, just posts.
+            <p className="text-base text-gray-600 mb-8 leading-relaxed max-w-md">
+              Scribble provides a clean, social space to publish your posts, read updates from others, and share ideas effortlessly.
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-3">
               <Link
                 to="/feed"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-full transition"
+                className="bg-[#1877f2] hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-sm transition"
               >
-                Browse the feed
+                Browse Feed
               </Link>
               <Link
                 to="/register"
-                className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium px-6 py-3 rounded-full transition"
+                className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-semibold px-6 py-3 rounded-lg transition shadow-xs"
               >
-                Get started
+                Create Account
               </Link>
             </div>
           </div>
 
-          {/* Simple visual placeholder — mimics a feed card */}
-          <div className="bg-white rounded-xl shadow-md p-6 space-y-4">
-            {[1, 2, 3].map(i => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-blue-100" />
-                <div className="flex-1 space-y-2">
-                  <div className="h-2.5 bg-gray-200 rounded w-1/3" />
-                  <div className="h-2 bg-gray-100 rounded w-2/3" />
-                </div>
+          {/* Social Card Preview Visual */}
+          <div className="bg-white rounded-xl border border-gray-200 shadow-md p-5 space-y-4">
+            <div className="flex items-center gap-3 border-b border-gray-100 pb-3">
+              <div className="w-10 h-10 rounded-full bg-[#1877f2] text-white flex items-center justify-center font-bold">
+                S
               </div>
-            ))}
+              <div>
+                <p className="text-sm font-bold text-gray-900">Scribble Team</p>
+                <p className="text-xs text-gray-400">Just now</p>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="h-3 bg-gray-200 rounded-full w-3/4" />
+              <div className="h-3 bg-gray-100 rounded-full w-full" />
+              <div className="h-3 bg-gray-100 rounded-full w-2/3" />
+            </div>
+            <div className="border-t border-gray-100 pt-3 flex justify-around text-xs font-semibold text-gray-400">
+              <span>👍 Like</span>
+              <span>💬 Comment</span>
+              <span>↗ Share</span>
+            </div>
           </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="text-center text-sm text-gray-400 py-6">
+      <footer className="text-center text-xs font-medium text-gray-500 py-6 border-t border-gray-200/60 bg-white">
         Built as a full-stack capstone project.
       </footer>
     </div>

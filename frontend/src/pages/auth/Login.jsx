@@ -5,7 +5,7 @@ import { useAuth } from "../../hooks/useAuth";
 import AuthForm from "../../components/auth/AuthForm";
 
 const inputClass =
-  "w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
+  "w-full bg-gray-50 border border-gray-300 rounded-lg px-3.5 py-2.5 text-sm text-gray-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1877f2] focus:border-transparent transition";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -45,49 +45,49 @@ export default function Login() {
   };
 
   return (
-    <>
-      <div className="max-w-sm mx-auto pt-6 px-4">
+    <div className="min-h-screen bg-[#f0f2f5] pt-4">
+      <div className="max-w-md mx-auto px-4 pt-4">
         <button
           onClick={() => navigate("/")}
-          className="text-sm text-blue-600 hover:underline"
+          className="inline-flex items-center text-sm font-semibold text-gray-600 hover:text-[#1877f2] transition"
         >
-          ← Back
+          ← Home
         </button>
       </div>
 
       <AuthForm
         title="Log in"
-        subtitle="Welcome back"
+        subtitle="Log into your account to continue"
         error={error}
         loading={loading}
         onSubmit={handleSubmit}
         fields={
-          <>
+          <div className="space-y-3">
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Email address"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               className={inputClass}
             />
             <input
               type="password"
               placeholder="Password"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               className={inputClass}
             />
-          </>
+          </div>
         }
         footer={
           <>
             Don't have an account?{" "}
-            <Link to="/register" className="text-blue-600 hover:underline font-medium">
+            <Link to="/register" className="text-[#1877f2] hover:underline font-semibold">
               Sign up
             </Link>
           </>
         }
       />
-    </>
+    </div>
   );
 }

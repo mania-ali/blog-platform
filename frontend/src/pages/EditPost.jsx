@@ -1,3 +1,4 @@
+// src/pages/EditPost.jsx
 import { useParams, useNavigate } from "react-router-dom";
 import { usePost, useUpdatePost } from "../hooks/usePosts";
 import { useState } from "react";
@@ -5,7 +6,7 @@ import Loading from "../components/common/Loading";
 import ErrorMessage from "../components/common/Error";
 
 const inputClass =
-  "w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
+  "w-full bg-gray-50 border border-gray-300 rounded-lg px-3.5 py-2.5 text-sm text-gray-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1877f2] focus:border-transparent transition";
 
 export default function EditPost() {
   const { id } = useParams();
@@ -58,49 +59,60 @@ function EditPostForm({ post }) {
   const displayError = formError || backendError;
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="max-w-xl mx-auto px-4 py-10">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Edit post</h1>
+    <div className="min-h-screen bg-[#f0f2f5] py-8">
+      <div className="max-w-xl mx-auto px-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="text-sm font-semibold text-gray-600 hover:text-[#1877f2] transition mb-4 inline-block"
+        >
+          ← Back
+        </button>
 
-        <form onSubmit={handleSubmit} noValidate className="bg-white rounded-xl shadow-sm p-6 space-y-4">
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className={inputClass}
-          />
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+          <h1 className="text-xl font-bold text-gray-900 mb-5 border-b border-gray-100 pb-3">
+            Edit Post
+          </h1>
 
-          <textarea
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            rows={8}
-            className={`${inputClass} resize-none`}
-          />
-
-          <label className="flex items-center gap-2 text-sm text-gray-700">
+          <form onSubmit={handleSubmit} noValidate className="space-y-4">
             <input
-              type="checkbox"
-              checked={published}
-              onChange={(e) => setPublished(e.target.checked)}
-              className="rounded"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className={inputClass}
             />
-            Published
-          </label>
 
-          {displayError && (
-            <p className="text-sm text-red-600 bg-red-50 rounded-md px-3 py-2">
-              {displayError}
-            </p>
-          )}
+            <textarea
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              rows={6}
+              className={`${inputClass} resize-none`}
+            />
 
-          <button
-            type="submit"
-            disabled={isPending}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-full transition disabled:opacity-50"
-          >
-            {isPending ? "Saving..." : "Save changes"}
-          </button>
-        </form>
+            <label className="flex items-center gap-2.5 text-sm font-semibold text-gray-700 cursor-pointer pt-1">
+              <input
+                type="checkbox"
+                checked={published}
+                onChange={(e) => setPublished(e.target.checked)}
+                className="w-4 h-4 text-[#1877f2] rounded border-gray-300 focus:ring-[#1877f2]"
+              />
+              Publish Post
+            </label>
+
+            {displayError && (
+              <p className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2 font-medium">
+                {displayError}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={isPending}
+              className="w-full bg-[#1877f2] hover:bg-blue-600 text-white font-semibold py-2.5 rounded-lg transition shadow-xs disabled:opacity-50 text-sm"
+            >
+              {isPending ? "Saving..." : "Save Changes"}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
